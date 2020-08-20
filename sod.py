@@ -1,5 +1,6 @@
 import os,sys
 import subprocess
+#import connect
 from termcolor import colored
 from subprocess import PIPE
 #from collections import OrderedDict 
@@ -33,18 +34,6 @@ port=[]
 command=""
 hostcount=0
 
-def setcolor(i):
-	global colo
-	if i.find("od")>=0:
-		colo="on_blue"
-	elif i.find("jb0")>=0:
-		colo='on_magenta'
-	elif i.find("ti")>=0:
-		colo='on_grey'
-	else:
-		colo="on_yellow"
-
-
 def work(host):
 	for i in host:
 		count=0
@@ -54,7 +43,15 @@ def work(host):
 		global summary
 		hostcount=hostcount+1
 		fileName="./sodout/"+i
-		setcolor(i)
+		if i.find("od")>=0:
+			colo="on_blue"
+		elif i.find("jb0")>=0:
+			colo='on_magenta'
+		elif i.find("ti")>=0:
+			colo='on_grey'
+		else:
+			colo="on_yellow"
+		#print colored("_______________________%s %s__________________________"%(hostcount,i),'on_yellow')
 		print colored("\n_______________________%s %s______________created by harneesi@in.ibm.com\n"%(hostcount,i),'white',colo,attrs=['bold'])
 		for x in host[i]:
 			command=command+"|\."+x+"$"
@@ -125,10 +122,11 @@ def work(host):
 		command=" "
 def tabprint():
 	print("----------Summary-------------- ")
+	#print(tabulate(port,tablefmt="fancy_grid"))
 	print(tabulate(port,head,tablefmt="pretty"))
 
-work(papyrus)
-work(ondemand)
-work(jboss)
+#work(papyrus)
+#work(ondemand)
+#work(jboss)
 work(treasury)
 tabprint()
