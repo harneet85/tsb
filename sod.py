@@ -125,7 +125,6 @@ def work(host):
 		command=" "
 def tabprint():
 	print("----------Summary-------------- ")
-	#print(tabulate(port,tablefmt="fancy_grid"))
 	print(tabulate(port,head,tablefmt="pretty"))
 
 work(papyrus)
