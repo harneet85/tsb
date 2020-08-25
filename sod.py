@@ -1,10 +1,12 @@
 import os,sys
 import subprocess
-#import connect
 from termcolor import colored
 from subprocess import PIPE
 #from collections import OrderedDict 
 from tabulate import tabulate
+
+
+######## Host port mapping
 
 papyrus= {
 "uk1py01tsb":{"19050":"IPAM","19051":"DC","19049":"NODE01"},
@@ -22,17 +24,40 @@ ondemand={
 "uk2od01tsb":{"9080":"server1","9081":"server2","9082":"server3"}
 }
 jboss={
-"es4jb04bsab":{"4448":"Jboss", "3873":"Jboss", "39490":"Jboss", "33286":"Jboss", "3528":"Jboss", "8009":"Jboss", "4457":"Jboss", "1098":"Jboss", "1099":"Jboss", "1100":"Jboss", "1101":"Jboss", "39886":"Jboss", "53232":"Jboss", "27377":"Jboss", "8083":"Jboss", "8565":"Jboss", "46261":"Jboss", "48537":"Jboss", "7900":"Jboss", "34364":"Jboss", "4444":"Jboss", "39612":"Jboss", "4445":"Jboss", "4446":"Jboss", "4447":"Jboss"}
+"es4jb04bsab":{"4448":"JBoss", "3873":"JBoss", "3528":"JBoss", "8009":"JBoss", "4457":"JBoss", "1098":"JBoss", "1099":"JBoss", "1100":"JBoss", "1101":"JBoss", "8083":"JBoss", "8565":"JBoss", "7900":"JBoss", "4444":"JBoss", "4445":"JBoss", "4446":"JBoss", "4447":"JBoss"},
+}
+jboss2={
+"es4jb04bsab":{"42388":"Jboss2","45480":"Jboss2","39266":"Jboss2","45109":"Jboss2","47923":"Jboss","12241":"JBoss","37356":"Jboss2"}
 }
 treasury={
 "uk1ti01tsb":{"1416":"MQMGR QMPRO"},
 "uk1ti11tsb":{"1416":"MQMGR QMTSBGOS"}
 }
 
+#################################
+############Env Variables########
+############# EDIT below location of the main program as is run independentyly ... For e.g below is the path and command for linux.
+mainpython="toxsocks /home/harneet/PycharmProjects/tsb1/venv/bin/python /home/harneet/PycharmProjects/tsb1/main.py"
+#############
 head=["Server","Port ok/nok","DiskSize ok/nok"]
 port=[]
 command=""
 hostcount=0
+disksize="90"
+
+#### Method to set color according to system
+def setcolor(i):
+	global colo
+	if i.find("od")>=0:
+		colo="on_blue"
+	elif i.find("jb0")>=0:
+		colo='on_magenta'
+	elif i.find("ti")>=0:
+		colo='on_grey'
+	else:
+		colo="on_yellow"
+
+### MAIN Method
 
 def work(host):
 	for i in host:
@@ -43,31 +68,25 @@ def work(host):
 		global summary
 		hostcount=hostcount+1
 		fileName="./sodout/"+i
-		if i.find("od")>=0:
-			colo="on_blue"
-		elif i.find("jb0")>=0:
-			colo='on_magenta'
-		elif i.find("ti")>=0:
-			colo='on_grey'
-		else:
-			colo="on_yellow"
-		#print colored("_______________________%s %s__________________________"%(hostcount,i),'on_yellow')
+		setcolor(i)
 		print colored("\n_______________________%s %s______________created by harneesi@in.ibm.com\n"%(hostcount,i),'white',colo,attrs=['bold'])
 		for x in host[i]:
 			command=command+"|\."+x+"$"
 		if i=="es4jb04bsab":
 			for x in host[i]:
-				command=command+"|."+x+"$"
+				command=command+"|\:"+x+"$"
+			command=command+"|grep -i 172.18.215.45"
 		else:
 			for x in host[i]:
 				command=command+"|\."+x+"$"
 		diclen=len(host[i])
-		cc="printf '\n'; netstat -an |grep -i listen| grep -iv tcp6| awk '{print \$4}'|egrep -i '99999"+command+"';printf '\n\n';df -m|sed 's?%??g'| awk '\$4 > 80 {print \$0}'"
+		cc="printf '\n'; netstat -an |grep -i listen| grep -iv tcp6| awk '{print \$4}'|egrep -i '99999"+command+"';printf '\n\n';df -m|sed 's?%??g'| awk '\$4 > "+disksize+" {print \$0}'"
 			
-		aa="toxsocks /home/harneet/PycharmProjects/tsb1/venv/bin/python /home/harneet/PycharmProjects/tsb1/main.py "+i+" \""+cc+"\""
+		aa=mainpython+" "+i+" \""+cc+"\""
 		outfile = open(fileName,"w") #same with "w" or "a" as opening mode
 		subprocess.call(aa, stdout=outfile,shell=True)
 		pFound=colored("All OK",'green')
+		print colored(" --- Ports information ---- ",'white',colo,  attrs=['bold'])	
 		for x in host[i]:
 			with open(fileName, 'r') as f:
 				for line in f:
@@ -99,20 +118,20 @@ def work(host):
 		port.append([i,pFound])
 
 
-		print colored(" --- Disk Info: More then 80% ---- ",'white',colo,  attrs=['bold'])
+		print colored(" --- Disk Info: More then "+disksize+" ---- ",'white',colo,  attrs=['bold'])
 		with open(fileName, 'r') as f:
 			for line in f:
 				dfound=False
 				if "Filesystem" in line:		
 					for line in f:
-						colored("\t ---Disk more than 80%---- ",'green')
+						colored("\t ---Disk more than "+disksize+"---- ",'green')
 						print(line.rstrip("\n"))
 						if len(line)>5:
 							dfound=True
 			arrlen=len(port)
 			newarr=port[arrlen-1]
 			if dfound:
-				newarr.append(colored("FileSystem more than 80",'red'))
+				newarr.append(colored("FileSystem more than "+disksize,'red'))
 			else:
 				newarr.append(colored("FileSystem OK",'green'))
 
@@ -120,13 +139,19 @@ def work(host):
 
 		print("\n")
 		command=" "
+
+##### Method to print summary
 def tabprint():
 	print("----------Summary-------------- ")
 	#print(tabulate(port,tablefmt="fancy_grid"))
 	print(tabulate(port,head,tablefmt="pretty"))
 
-#work(papyrus)
-#work(ondemand)
-#work(jboss)
+
+##### MAIN Execution starts
+
+work(papyrus)
+work(jboss)
+work(jboss2)
 work(treasury)
+work(ondemand)
 tabprint()
