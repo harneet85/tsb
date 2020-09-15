@@ -4,46 +4,38 @@ from termcolor import colored
 from subprocess import PIPE
 #from collections import OrderedDict 
 from tabulate import tabulate
+import colorama
+
+sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)),'lib'))
+
+from serverlist import *
+import connect
 
 
-######## Host port mapping
-
-papyrus= {
-"uk1py01tsb":{"19050":"IPAM","19051":"DC","19049":"NODE01"},
-"uk1py03tsb":{"19021":"NODE01","19022":"NODE02","19023":"NODE03","19024":"NODE04","80":"HTTP","666":"HTTP","443":"HTTPS"},
-"uk1py05tsb":{"19025":"NODE05","19026":"NODE06","19027":"NODE07","19028":"NODE08","80":"HTTP","666":"HTTP","443":"HTTPS"},
-"uk1py07tsb":{"19029":"NODE09","19030":"NODE10","19031":"NODE11","80":"HTTP","666":"HTTP","443":"HTTPS"},
-"uk2py01tsb":{"19050":"IPAM","19051":"DC","19049":"NODE01"},
-"uk2py03tsb":{"19021":"NODE01","19022":"NODE02","19023":"NODE03","19024":"NODE04","80":"HTTP","666":"HTTP","443":"HTTPS"},
-"uk2py05tsb":{"19025":"NODE05","19026":"NODE06","19027":"NODE07","19028":"NODE08","80":"HTTP","666":"HTTP","443":"HTTPS"},
-"uk2py07tsb":{"19029":"NODE09","19030":"NODE10","19031":"NODE11","80":"HTTP","666":"HTTP","443":"HTTPS"},
-}
-ondemand={
-"uk1od01tsb":{"9080":"server1","9081":"server2","9082":"server3"},
-"uk1od11tsb":{"9080":"server1","9081":"server2","9082":"server3"},
-"uk2od01tsb":{"9080":"server1","9081":"server2","9082":"server3"}
-}
-jboss={
-"es4jb04bsab":{"4448":"JBoss", "3873":"JBoss", "3528":"JBoss", "8009":"JBoss", "4457":"JBoss", "1098":"JBoss", "1099":"JBoss", "1100":"JBoss", "1101":"JBoss", "8083":"JBoss", "8565":"JBoss", "7900":"JBoss", "4444":"JBoss", "4445":"JBoss", "4446":"JBoss", "4447":"JBoss"},
-}
-jboss2={
-"es4jb04bsab":{"42388":"Jboss2","45480":"Jboss2","39266":"Jboss2","45109":"Jboss2","47923":"Jboss","12241":"JBoss","37356":"Jboss2"}
-}
-treasury={
-"uk1ti01tsb":{"1416":"MQMGR QMPRO"},
-"uk1ti11tsb":{"1416":"MQMGR QMTSBGOS"}
-}
-
-#################################
-############Env Variables########
-############# EDIT below location of the main program as is run independentyly ... For e.g below is the path and command for linux.
-mainpython="toxsocks /home/harneet/PycharmProjects/tsb1/venv/bin/python /home/harneet/PycharmProjects/tsb1/main.py"
-#############
 head=["Server","Port ok/nok","DiskSize ok/nok"]
 port=[]
 command=""
 hostcount=0
 disksize="90"
+user="in0090g5"
+passw="Windows12345"
+dirname="sodout"
+#colorama.init()
+
+
+#######
+
+def dircreate():
+	if not os.path.exists(dirname):
+		os.mkdir(dirname)
+	if not os.path.exists("report"):
+		os.mkdir("report")
+
+def dirremove():
+	if os.path.exists(dirname):
+		os.rmdir(dirname)
+
+
 
 #### Method to set color according to system
 def setcolor(i):
@@ -67,28 +59,28 @@ def work(host):
 		global port
 		global summary
 		hostcount=hostcount+1
-		fileName="./sodout/"+i
+		rfilename="/tmp/"+user+"."+i
+		lfilename="./"+dirname+"/"+i
 		setcolor(i)
 		print colored("\n_______________________%s %s______________created by harneesi@in.ibm.com\n"%(hostcount,i),'white',colo,attrs=['bold'])
-		for x in host[i]:
-			command=command+"|\."+x+"$"
 		if i=="es4jb04bsab":
 			for x in host[i]:
 				command=command+"|\:"+x+"$"
-			command=command+"|grep -i 172.18.215.45"
+			command=command+"'|grep -i '172.18.215.45"
 		else:
 			for x in host[i]:
 				command=command+"|\."+x+"$"
 		diclen=len(host[i])
-		cc="printf '\n'; netstat -an |grep -i listen| grep -iv tcp6| awk '{print \$4}'|egrep -i '99999"+command+"';printf '\n\n';df -m|sed 's?%??g'| awk '\$4 > "+disksize+" {print \$0}'"
-			
-		aa=mainpython+" "+i+" \""+cc+"\""
-		outfile = open(fileName,"w") #same with "w" or "a" as opening mode
-		subprocess.call(aa, stdout=outfile,shell=True)
+		cc="hostname >"+rfilename+";netstat -an |grep -i listen| grep -iv tcp6| awk '{print $4}'|egrep -i '99999"+command+"'>>"+rfilename+";echo Disk space >>"+rfilename+";df -m|sed 's?%??g'| awk '$4 > "+disksize+" {print $0}'>>"+rfilename+""
+		#print(cc)
+		connobj=connect.conn()
+		connobj.conexe(i,user,passw)
+		connobj.command(cc)
+		connobj.recieve(rfilename,lfilename)
 		pFound=colored("All OK",'green')
 		print colored(" --- Ports information ---- ",'white',colo,  attrs=['bold'])	
 		for x in host[i]:
-			with open(fileName, 'r') as f:
+			with open(lfilename, 'r') as f:
 				for line in f:
 					if i in line:                
 						outnum=-1
@@ -119,7 +111,7 @@ def work(host):
 
 
 		print colored(" --- Disk Info: More then "+disksize+" ---- ",'white',colo,  attrs=['bold'])
-		with open(fileName, 'r') as f:
+		with open(lfilename, 'r') as f:
 			for line in f:
 				dfound=False
 				if "Filesystem" in line:		
@@ -139,6 +131,7 @@ def work(host):
 
 		print("\n")
 		command=" "
+		os.remove(lfilename)
 
 ##### Method to print summary
 def tabprint():
@@ -149,9 +142,11 @@ def tabprint():
 
 ##### MAIN Execution starts
 
-work(papyrus)
+dircreate()
+#work(papyrus)
 work(jboss)
-work(jboss2)
-work(treasury)
+#work(jboss2)
+#work(treasury)
 work(ondemand)
 tabprint()
+dirremove()
