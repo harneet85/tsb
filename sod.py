@@ -23,6 +23,7 @@ dirname="sodout"
 #colorama.init()
 
 
+
 #######
 
 def dircreate():
@@ -71,11 +72,15 @@ def work(host):
 			for x in host[i]:
 				command=command+"|\."+x+"$"
 		diclen=len(host[i])
-		cc="hostname >"+rfilename+";netstat -an |grep -i listen| grep -iv tcp6| awk '{print $4}'|egrep -i '99999"+command+"'>>"+rfilename+";echo Disk space >>"+rfilename+";df -m|sed 's?%??g'| awk '$4 > "+disksize+" {print $0}'>>"+rfilename+""
+		c1="hostname >"+rfilename+";netstat -an |grep -i listen| grep -iv tcp6| awk '{print $4}'|egrep -i '99999"+command+"'>>"+rfilename
+		c2="echo Disk space >>"+rfilename+";df -m|sed 's?%??g'| awk '$4 > "+disksize+" {print $0}'>>"+rfilename+""
+		c3="echo RAM info >> "+rfilename+";free -m>>"+rfilename
 		#print(cc)
 		connobj=connect.conn()
 		connobj.conexe(i,user,passw)
-		connobj.command(cc)
+		connobj.command(c1)
+		connobj.command(c2)
+		connobj.command(c3)
 		connobj.recieve(rfilename,lfilename)
 		pFound=colored("All OK",'green')
 		print colored(" --- Ports information ---- ",'white',colo,  attrs=['bold'])	
@@ -126,7 +131,11 @@ def work(host):
 				newarr.append(colored("FileSystem more than "+disksize,'red'))
 			else:
 				newarr.append(colored("FileSystem OK",'green'))
-
+			
+			for line in f:
+				if "RAM" in line:
+					for line in f:
+						print(line.rstrip("\n"))	
 
 
 		print("\n")
@@ -143,10 +152,10 @@ def tabprint():
 ##### MAIN Execution starts
 
 dircreate()
-#work(papyrus)
+work(papyrus)
 work(jboss)
 #work(jboss2)
-#work(treasury)
+work(treasury)
 work(ondemand)
 tabprint()
 dirremove()
