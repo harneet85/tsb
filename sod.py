@@ -1,15 +1,17 @@
+####### Python script Created and Maintained by - Harneet Singh - harneesi@in.ibm.com
+####### code name- thor
+####### v-1
+####### Files - sod.py , sod.sh , lib/connect.py , lib/servername.py
+####### Dir - lib
 import os,sys
 import subprocess
 from termcolor import colored
 from subprocess import PIPE
-#from collections import OrderedDict 
 from tabulate import tabulate
 import colorama
 import platform
 from getpass import getpass
-
 sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)),'lib'))
-
 from serverlist import *
 import connect
 
@@ -19,8 +21,8 @@ port=[]
 command=""
 hostcount=0
 disksize="90"
-user="in0090g5"
-passw="Wizard12345"
+user=""
+passw=""
 dirname="sodout"
 colorama.init()
 enable="yes"
@@ -166,10 +168,10 @@ def tabprint():
 
 inputuser()
 dircreate()
-work(papyrus)
+#work(papyrus)
 work(jboss)
 #work(jboss2)
-work(treasury)
-work(ondemand)
+#work(treasury)
+#work(ondemand)
 tabprint()
 dirremove()
