@@ -33,7 +33,6 @@ def inputuser():
 	global passw
 	global enable
 	enable=raw_input("Credentials same for all server or not ? y/n ").lower()
-	print(enable)
 	while not ( len(enable) == 1 and ( enable == "y" or enable == "n" )):
 		print("Incorrect input, try again")
 		enable=raw_input("Credentials same for all server or not ? y/n").lower()
@@ -104,33 +103,25 @@ def work(host):
                                 command=command+"|\:"+x+"$"
                 c1="hostname >"+rfilename+";netstat -an |grep -i listen| grep -iv tcp6| awk '{print $4}'|egrep -i '99999"+command+"'>>"+rfilename
                 c2="echo Disk space >>"+rfilename+";df -Pm|sed 's?%??g'| awk '$(NF-1) > "+disksize+" {print $0}'>>"+rfilename+""
-#                c3="echo RAM info >> "+rfilename+";free -m>>"+rfilename
 		connobj.command(c1)
 		connobj.command(c2)
-#		connobj.command(c3)
 		connobj.recieve(rfilename,lfilename)
 		pFound=colored("All OK",'green')
 		print colored(" --- Ports information --(os - %s )-- "%(sysname),'white',colo,  attrs=['bold'])	
 		for x in host[i]:
+			colored("\t ---- PORTS ---- ",'green')
 			with open(lfilename, 'r') as f:
 				for line in f:
-					if i in line:                
-						outnum=-1
-						for line in f:
-							outnum=line.find(x)
-							colored("\t ---- PORTS ---- ",'green')
-							if outnum>=0:
-								count=count+1
-								print colored("\t"+i+"\t "+x+"\t "+host[i][x]+"\t FOUND \t"+line.rstrip("\n"),'green')
-								
+					if x in line:                
+						count=count+1
+						print colored("\t"+i+"\t "+x+"\t "+host[i][x]+"\t FOUND \t"+line.rstrip("\n"),'green')
+							
 								#port.append([i,x,host[i][x],colored("FOUND",'green')])
-								break
-							if line.find("Filesystem")>=0:
-								#print(line)
-								break
-						if outnum<0:
-							print colored("\t"+i+"\t "+x+"\t "+host[i][x]+"\t NOT FOUND \t"+line.rstrip("\n"),'red')
-							#port.append([i,x,host[i][x],colored("NOT FOUND",'red')])
+						break
+					if line.find("Filesystem")>=0:
+						#print(line)
+						print colored("\t"+i+"\t "+x+"\t "+host[i][x]+"\t NOT FOUND \t"+line.rstrip("\n"),'red')
+						break
 
 		if count==diclen:
 			#print colored("\t ALL Ports verified OK",'green', 'on_grey', ['blue', 'blink'])
@@ -168,7 +159,6 @@ def work(host):
 ##### Method to print summary
 def tabprint():
 	print("----------Summary-------------- ")
-	#print(tabulate(port,tablefmt="fancy_grid"))
 	print(tabulate(port,head,tablefmt="pretty"))
 
 
