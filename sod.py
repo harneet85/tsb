@@ -6,6 +6,7 @@ from subprocess import PIPE
 from tabulate import tabulate
 import colorama
 import platform
+from getpass import getpass
 
 sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)),'lib'))
 
@@ -22,9 +23,25 @@ user="in0090g5"
 passw="Wizard12345"
 dirname="sodout"
 colorama.init()
+enable="yes"
 
 
 #######
+
+def inputuser():
+	global user
+	global passw
+	global enable
+	enable=raw_input("Credentials same for all server or not ? y/n ").lower()
+	print(enable)
+	while not ( len(enable) == 1 and ( enable == "y" or enable == "n" )):
+		print("Incorrect input, try again")
+		enable=raw_input("Credentials same for all server or not ? y/n").lower()
+	print("out of loop")
+	if enable == "y":
+		user=raw_input("Provide your username : ")
+		passw=getpass()
+	print("out of if")
 
 def dircreate():
 	if not os.path.exists(dirname):
@@ -59,6 +76,9 @@ def work(host):
 		global command
 		global port
 		global summary
+		global user
+		global passw
+		global enable
 		hostcount=hostcount+1
 		rfilename="/tmp/"+user+"."+i
 		lfilename="./"+dirname+"/"+i
@@ -66,10 +86,11 @@ def work(host):
 		print colored("\n_______________________%s %s ______________created by harneesi@in.ibm.com\n"%(hostcount,i),'white',colo,attrs=['bold'])
 		diclen=len(host[i])
 		c0="uname"
-		#c1="hostname >"+rfilename+";netstat -an |grep -i listen| grep -iv tcp6| awk '{print $4}'|egrep -i '99999"+command+"'>>"+rfilename
-		#c2="echo Disk space >>"+rfilename+";df -m|sed 's?%??g'| awk '$4 > "+disksize+" {print $0}'>>"+rfilename+""
-		#c3="echo RAM info >> "+rfilename+";free -m>>"+rfilename
-		#print(cc)
+		if enable == "n" :
+                	user=raw_input("Provide your username for server "+i+" ")
+                	passw=getpass()
+
+
 		connobj=connect.conn()
 		connobj.conexe(i,user,passw)
 		sysname=connobj.command(c0).rstrip("\n")
@@ -77,18 +98,15 @@ def work(host):
                         for x in host[i]:
                                 command=command+"|\:"+x+"$"
                         command=command+"'|grep -i '172.18.215.45"
-#			c2="echo Disk space >>"+rfilename+";df -m|sed 's?%??g'| awk '$(NF-1) > "+disksize+" {print $0}'>>"+rfilename+""
                 elif sysname.find("AIX")>=0:
                         for x in host[i]:
                                 command=command+"|\."+x+"$"
-#			c2="echo Disk space >>"+rfilename+";df -m|sed 's?%??g'| awk '$4 > "+disksize+" {print $0}'>>"+rfilename+""
                 else:
                         for x in host[i]:
                                 command=command+"|\:"+x+"$"
-#			c2="echo Disk space >>"+rfilename+";df -m|sed 's?%??g'| awk '$4 > "+disksize+" {print $0}'>>"+rfilename+""
                 c1="hostname >"+rfilename+";netstat -an |grep -i listen| grep -iv tcp6| awk '{print $4}'|egrep -i '99999"+command+"'>>"+rfilename
                 c2="echo Disk space >>"+rfilename+";df -Pm|sed 's?%??g'| awk '$(NF-1) > "+disksize+" {print $0}'>>"+rfilename+""
-                c3="echo RAM info >> "+rfilename+";free -m>>"+rfilename
+#                c3="echo RAM info >> "+rfilename+";free -m>>"+rfilename
 		connobj.command(c1)
 		connobj.command(c2)
 #		connobj.command(c3)
@@ -158,11 +176,12 @@ def tabprint():
 
 ##### MAIN Execution starts
 
+inputuser()
 dircreate()
-#work(papyrus)
+work(papyrus)
 work(jboss)
 #work(jboss2)
-#work(treasury)
+work(treasury)
 work(ondemand)
 tabprint()
 dirremove()
