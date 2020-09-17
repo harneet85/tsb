@@ -37,11 +37,9 @@ def inputuser():
 	while not ( len(enable) == 1 and ( enable == "y" or enable == "n" )):
 		print("Incorrect input, try again")
 		enable=raw_input("Credentials same for all server or not ? y/n").lower()
-	print("out of loop")
 	if enable == "y":
 		user=raw_input("Provide your username : ")
 		passw=getpass()
-	print("out of if")
 
 def dircreate():
 	if not os.path.exists(dirname):
