@@ -5,6 +5,7 @@ from subprocess import PIPE
 #from collections import OrderedDict 
 from tabulate import tabulate
 import colorama
+import platform
 
 sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)),'lib'))
 
@@ -18,10 +19,9 @@ command=""
 hostcount=0
 disksize="90"
 user="in0090g5"
-passw="Windows12345"
+passw="Wizard12345"
 dirname="sodout"
-#colorama.init()
-
+colorama.init()
 
 
 #######
@@ -63,27 +63,38 @@ def work(host):
 		rfilename="/tmp/"+user+"."+i
 		lfilename="./"+dirname+"/"+i
 		setcolor(i)
-		print colored("\n_______________________%s %s______________created by harneesi@in.ibm.com\n"%(hostcount,i),'white',colo,attrs=['bold'])
-		if i=="es4jb04bsab":
-			for x in host[i]:
-				command=command+"|\:"+x+"$"
-			command=command+"'|grep -i '172.18.215.45"
-		else:
-			for x in host[i]:
-				command=command+"|\."+x+"$"
+		print colored("\n_______________________%s %s ______________created by harneesi@in.ibm.com\n"%(hostcount,i),'white',colo,attrs=['bold'])
 		diclen=len(host[i])
-		c1="hostname >"+rfilename+";netstat -an |grep -i listen| grep -iv tcp6| awk '{print $4}'|egrep -i '99999"+command+"'>>"+rfilename
-		c2="echo Disk space >>"+rfilename+";df -m|sed 's?%??g'| awk '$4 > "+disksize+" {print $0}'>>"+rfilename+""
-		c3="echo RAM info >> "+rfilename+";free -m>>"+rfilename
+		c0="uname"
+		#c1="hostname >"+rfilename+";netstat -an |grep -i listen| grep -iv tcp6| awk '{print $4}'|egrep -i '99999"+command+"'>>"+rfilename
+		#c2="echo Disk space >>"+rfilename+";df -m|sed 's?%??g'| awk '$4 > "+disksize+" {print $0}'>>"+rfilename+""
+		#c3="echo RAM info >> "+rfilename+";free -m>>"+rfilename
 		#print(cc)
 		connobj=connect.conn()
 		connobj.conexe(i,user,passw)
+		sysname=connobj.command(c0).rstrip("\n")
+                if i=="es4jb04bsab":
+                        for x in host[i]:
+                                command=command+"|\:"+x+"$"
+                        command=command+"'|grep -i '172.18.215.45"
+#			c2="echo Disk space >>"+rfilename+";df -m|sed 's?%??g'| awk '$(NF-1) > "+disksize+" {print $0}'>>"+rfilename+""
+                elif sysname.find("AIX")>=0:
+                        for x in host[i]:
+                                command=command+"|\."+x+"$"
+#			c2="echo Disk space >>"+rfilename+";df -m|sed 's?%??g'| awk '$4 > "+disksize+" {print $0}'>>"+rfilename+""
+                else:
+                        for x in host[i]:
+                                command=command+"|\:"+x+"$"
+#			c2="echo Disk space >>"+rfilename+";df -m|sed 's?%??g'| awk '$4 > "+disksize+" {print $0}'>>"+rfilename+""
+                c1="hostname >"+rfilename+";netstat -an |grep -i listen| grep -iv tcp6| awk '{print $4}'|egrep -i '99999"+command+"'>>"+rfilename
+                c2="echo Disk space >>"+rfilename+";df -Pm|sed 's?%??g'| awk '$(NF-1) > "+disksize+" {print $0}'>>"+rfilename+""
+                c3="echo RAM info >> "+rfilename+";free -m>>"+rfilename
 		connobj.command(c1)
 		connobj.command(c2)
-		connobj.command(c3)
+#		connobj.command(c3)
 		connobj.recieve(rfilename,lfilename)
 		pFound=colored("All OK",'green')
-		print colored(" --- Ports information ---- ",'white',colo,  attrs=['bold'])	
+		print colored(" --- Ports information --(os - %s )-- "%(sysname),'white',colo,  attrs=['bold'])	
 		for x in host[i]:
 			with open(lfilename, 'r') as f:
 				for line in f:
@@ -132,10 +143,6 @@ def work(host):
 			else:
 				newarr.append(colored("FileSystem OK",'green'))
 			
-			for line in f:
-				if "RAM" in line:
-					for line in f:
-						print(line.rstrip("\n"))	
 
 
 		print("\n")
@@ -152,10 +159,10 @@ def tabprint():
 ##### MAIN Execution starts
 
 dircreate()
-work(papyrus)
+#work(papyrus)
 work(jboss)
 #work(jboss2)
-work(treasury)
+#work(treasury)
 work(ondemand)
 tabprint()
 dirremove()
