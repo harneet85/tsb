@@ -122,7 +122,7 @@ def work(host):
 						break
 					if line.find("Filesystem")>=0:
 						#print(line)
-						print colored("\t"+i+"\t "+x+"\t "+host[i][x]+"\t NOT FOUND \t"+line.rstrip("\n"),'red')
+						print colored("\t"+i+"\t "+x+"\t "+host[i][x]+"\t NOT FOUND \t",'red')
 						break
 
 		if count==diclen:
@@ -156,7 +156,7 @@ def work(host):
 
 		print("\n")
 		command=" "
-		os.remove(lfilename)
+#		os.remove(lfilename)
 
 ##### Method to print summary
 def tabprint():
@@ -166,12 +166,12 @@ def tabprint():
 
 ##### MAIN Execution starts
 
-inputuser()
+#inputuser()
 dircreate()
-#work(papyrus)
+work(papyrus)
 work(jboss)
 #work(jboss2)
-#work(treasury)
-#work(ondemand)
+work(treasury)
+work(ondemand)
 tabprint()
-dirremove()
+#dirremove()

@@ -1,0 +1,8 @@
+uk1od11tsb
+*.9080
+*.9081
+*.9082
+Disk space
+Filesystem    MB blocks      Used Available Capacity Mounted on
+/dev/lv_ptfs   12288.00  11130.10   1157.90      91 /ptfs
+/dev/lv_software   8192.00   7768.18    423.82      95 /software
