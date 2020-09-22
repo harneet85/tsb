@@ -1,8 +1,0 @@
-uk2od01tsb
-*.9080
-*.9081
-*.9082
-10.185.51.72.80
-Disk space
-Filesystem    MB blocks      Used Available Capacity Mounted on
-/dev/lv_software   8192.00   7773.13    418.87      95 /software
