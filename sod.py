@@ -1,6 +1,6 @@
 ####### Python script Created and Maintained by - Harneet Singh - harneesi@in.ibm.com
 ####### code name- thor
-####### v-1
+####### v-1, date 18 Sep 2020
 ####### Files - sod.py , sod.sh , lib/connect.py , lib/servername.py
 ####### Dir - lib
 import os,sys
@@ -21,8 +21,8 @@ port=[]
 command=""
 hostcount=0
 disksize="90"
-user=""
-passw=""
+user="in0090g5"
+passw="Wizard12345"
 dirname="sodout"
 colorama.init()
 enable="yes"
@@ -156,7 +156,7 @@ def work(host):
 
 		print("\n")
 		command=" "
-#		os.remove(lfilename)
+		os.remove(lfilename)
 
 ##### Method to print summary
 def tabprint():
@@ -174,4 +174,4 @@ work(jboss)
 work(treasury)
 work(ondemand)
 tabprint()
-#dirremove()
+dirremove()
