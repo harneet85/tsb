@@ -18,15 +18,16 @@ import connect
 
 head=["Server","Port ok/nok","DiskSize ok/nok","URL ok/nok","Process ok/nok"]
 port=[]
-command=""
+command1=""
 hostcount=0
 disksize="90"
-user="in0090g5"
-passw="Wizard12345"
+user=""
+passw=""
 dirname="sodout"
 colorama.init()
 enable="yes"
 c4=""
+c1=""
 rfilename=""
 command4=""
 
@@ -89,10 +90,28 @@ def processcommand(hosturl):
                 if i.find("process")>=0:
                         #command5=command5+"echo checking "+hosturl[i]+">>"+rfilename+";echo""| awk '{print \"\t"+i+"\t\t"+str(hosturl[i])+" \" system(\"wget "+str(hosturl[i])+" 2>&1| egrep 'OK'\") }' >> "+rfilename+";"
                         command5=command5+"a=`echo "+i+"| awk -F\"_\" '{system(\"ps -ef | grep -i \"$2)}'|grep -v grep|wc -l`; echo "+i+" $a  >> "+rfilename+";"
-                c5="echo ---- Process CHECKING ------ >> "+rfilename+";"+command5
-	#print(c5)
-        #return c5
+	c5="echo ---- Process CHECKING ------ >> "+rfilename+";"+command5+"echo ---- Process End----- >>"+rfilename
 
+def portcommand(hostin,sysnamein):
+	global command1
+	global c1
+	if hostin=="es4jb04bsab":
+		for x in host:
+			if x.find("url")>=0 or x.find("process")>=0:
+				continue
+			command1=command1+"|\:"+x+"$"
+		command1=command1+"'|grep -i '172.18.215.45"
+	elif sysnamein.find("AIX")>=0:
+		for x in hostin:
+			if x.find("url")>=0 or x.find("process")>=0:
+				continue
+			command1=command1+"|\."+x+"$"
+	else:
+		for x in hostin:
+			if x.find("url")>=0 or x.find("process")>=0:
+				continue
+			command1=command1+"|\:"+x+"$"
+	c1="hostname >"+rfilename+";netstat -an |grep -i listen| grep -iv tcp6| awk '{print $4}'|egrep -i '99999"+command1+"'>>"+rfilename
 
 ### MAIN Method
 
@@ -122,24 +141,7 @@ def work(host):
 		connobj=connect.conn()
 		connobj.conexe(i,user,passw)
 		sysname=connobj.command(c0).rstrip("\n")
-                if i=="es4jb04bsab":
-                        for x in host[i]:
-				if x.find("url")>=0 or x.find("process")>=0:
-					continue
-                                command=command+"|\:"+x+"$"
-                        command=command+"'|grep -i '172.18.215.45"
-                elif sysname.find("AIX")>=0:
-                        for x in host[i]:
-                                if x.find("url")>=0 or x.find("process")>=0:
-					continue
-                                command=command+"|\."+x+"$"
-                else:
-                        for x in host[i]:
-				print("current ",x)
-                                if x.find("url")>=0 or x.find("process")>=0:
-                                        continue
-                                command=command+"|\:"+x+"$"
-                c1="hostname >"+rfilename+";netstat -an |grep -i listen| grep -iv tcp6| awk '{print $4}'|egrep -i '99999"+command+"'>>"+rfilename
+		portcommand(host[i],sysname)
                 c2="echo Disk space >>"+rfilename+";df -Pm|sed 's?%??g'| awk '$(NF-1) > "+disksize+" {print $0}'>>"+rfilename+""
 		connobj.command(c1)
 		connobj.command(c2)
@@ -161,16 +163,12 @@ def work(host):
 					if x in line:                
 						count=count+1
 						print colored("\t"+i+"\t "+x+"\t "+host[i][x]+"\t FOUND \t"+line.rstrip("\n"),'green')
-							
-								#port.append([i,x,host[i][x],colored("FOUND",'green')])
 						break
 					if line.find("Filesystem")>=0:
-						#print(line)
 						print colored("\t"+i+"\t "+x+"\t "+host[i][x]+"\t NOT FOUND \t",'red')
 						break
 
 		if count==diclen:
-			#print colored("\t ALL Ports verified OK",'green', 'on_grey', ['blue', 'blink'])
 			print colored("\t ALL Ports verified OK \t",'white', 'on_green', attrs=['blink','bold'])
 		else:
 			print colored("\t ----SOMETHING WRONG -----", 'white','on_red',attrs=['blink','bold'])
@@ -188,7 +186,6 @@ def work(host):
 					for line in f:
 						if "URL" in line:
 							break
-						#colored("\t ---Disk more than "+disksize+"---- ",'green')
 						print("\t"+line.rstrip("\n"))
 						if len(line)>5:
 							dfound=True
@@ -201,8 +198,10 @@ def work(host):
 				newarr.append(colored("FileSystem OK",'green'))
 
 
+
 ################# URL CHECKING ######### 
 		ufound=True
+		ufound2=False
                 print colored(" --- URL Info ---- ",'white',colo,  attrs=['bold'])
                 with open(lfilename, 'r') as f:
                         for line in f:
@@ -212,41 +211,65 @@ def work(host):
                                                         break
 						if line.find("checking")>=0 or line.find("response")>=0:
 							continue
-                                                if line.rstrip("\n")[-1]=="1":
-                                                       	ufound=False
-							print colored(line.rstrip("\n")+"\t\t NOT OK",'red')
-						else:
-							print colored(line.rstrip("\n")+"\t\t OK",'green')
+						if len(line)>5:
+							ufound2=True
+                                                	if line.rstrip("\n")[-1]=="1":
+                                                       		ufound=False
+								print colored(line.rstrip("\n")+"\t\t NOT OK",'red')
+							else:
+								print colored(line.rstrip("\n")+"\t\t OK",'green')
+
                         arrlen=len(port)
                         newarr=port[arrlen-1]
                         if ufound:
-                                newarr.append(colored("URL OK",'green'))
+                                if ufound2:
+					newarr.append(colored("URL OK",'green'))
+					print colored("\t ALL URL verified OK \t",'white', 'on_green', attrs=['blink','bold'])
+				else:
+					print("\tNo URL to check")
+					newarr.append(colored("No URL set"))
                         else:
                                 newarr.append(colored("URL not OK",'red'))
+				print colored("\t ----SOMETHING WRONG -----", 'white','on_red',attrs=['blink','bold'])
 
 ################ PROCESS Checking
 
                 pfound=True
+		pfound2=False
                 print colored(" --- Process Info ---- ",'white',colo,  attrs=['bold'])
                 with open(lfilename, 'r') as f:
                         for line in f:
                                 if "Process" in line:
 					for line in f:
+						if line.find("Process CHECK")>=0:
+							continue
+						if line.find("Process End")>=0:
+							break
 						n=line.split(" ")[0]
 						n2=line.rstrip("\n").split(" ")[1]
 						if host[i][n]==n2:
-							print colored("\t"+n+"\t requiredValue: "+host[i][n]+" ValueiFound: "+n2,'green')	
+							print colored("\t"+n+"\t requiredValue: "+host[i][n]+" ValueFound: "+n2,'green')	
 						else:
 							print colored("\t"+n+"\t required value"+host[i][n]+" Value found"+n2,'red')
 							pfound=False
+						if len(line)>7:
+							pfound2=True
+							#print("line : ",len)
 
 
                         arrlen=len(port)
                         newarr=port[arrlen-1]
+			#print(pfound2)
                         if pfound:
-                                newarr.append(colored("Processes OK",'green'))
+				if pfound2:
+                                	newarr.append(colored("Processes OK",'green'))
+					print colored("\t ALL Process verified OK \t",'white', 'on_green', attrs=['blink','bold'])
+				else:
+					print colored("\tNo processes set")
+					newarr.append(colored("No process set"))
                         else:
                                 newarr.append(colored("Process not OK",'red'))
+				print colored("\t ----SOMETHING WRONG -----", 'white','on_red',attrs=['blink','bold'])
 
 #####################
 
@@ -257,7 +280,7 @@ def work(host):
 		print("\n")
 		command=" "
 		command4=""
-#		os.remove(lfilename)
+		os.remove(lfilename)
 
 ##### Method to print summary
 def tabprint():
@@ -274,6 +297,5 @@ work(jboss)
 #work(jboss2)
 work(treasury)
 work(ondemand)
-#work(dummy)
 tabprint()
-#dirremove()
+dirremove()
