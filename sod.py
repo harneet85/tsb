@@ -1,6 +1,6 @@
 ####### Python script Created and Maintained by - Harneet Singh - harneesi@in.ibm.com
 ####### code name- thor
-####### v-1, date 18 Sep 2020
+####### v-2, date 23 Sep 2020
 ####### Files - sod.py , sod.sh , lib/connect.py , lib/servername.py
 ####### Dir - lib
 import os,sys
@@ -16,7 +16,7 @@ from serverlist import *
 import connect
 
 
-head=["Server","Port ok/nok","DiskSize ok/nok"]
+head=["Server","Port ok/nok","DiskSize ok/nok","URL ok/nok","Process ok/nok"]
 port=[]
 command=""
 hostcount=0
@@ -26,6 +26,9 @@ passw="Wizard12345"
 dirname="sodout"
 colorama.init()
 enable="yes"
+c4=""
+rfilename=""
+command4=""
 
 
 #######
@@ -66,11 +69,37 @@ def setcolor(i):
 	else:
 		colo="on_yellow"
 
+def urlcommand(hosturl):
+	global c4
+	global command4
+	c4=""
+	command4=""
+	for i in hosturl:
+		if i.find("url")>=0:
+			command4=command4+"echo checking "+hosturl[i]+">>"+rfilename+";echo""| awk '{print \"\t"+i+"\t\t"+str(hosturl[i])+" \" system(\"wget "+str(hosturl[i])+" 2>&1| egrep 'OK'\") }' >> "+rfilename+";"
+		c4="echo ---- URL CHECKING ------ >> "+rfilename+";"+command4
+	#return c4
+
+def processcommand(hosturl):
+        global c5
+        global command5
+        c5=""
+        command5=""
+        for i in hosturl:
+                if i.find("process")>=0:
+                        #command5=command5+"echo checking "+hosturl[i]+">>"+rfilename+";echo""| awk '{print \"\t"+i+"\t\t"+str(hosturl[i])+" \" system(\"wget "+str(hosturl[i])+" 2>&1| egrep 'OK'\") }' >> "+rfilename+";"
+                        command5=command5+"a=`echo "+i+"| awk -F\"_\" '{system(\"ps -ef | grep -i \"$2)}'|grep -v grep|wc -l`; echo "+i+" $a  >> "+rfilename+";"
+                c5="echo ---- Process CHECKING ------ >> "+rfilename+";"+command5
+	#print(c5)
+        #return c5
+
+
 ### MAIN Method
 
 def work(host):
 	for i in host:
 		count=0
+		diclen=0
 		global hostcount
 		global command
 		global port
@@ -78,12 +107,12 @@ def work(host):
 		global user
 		global passw
 		global enable
+		global rfilename
 		hostcount=hostcount+1
 		rfilename="/tmp/"+user+"."+i
 		lfilename="./"+dirname+"/"+i
 		setcolor(i)
 		print colored("\n_______________________%s %s ______________created by harneesi@in.ibm.com\n"%(hostcount,i),'white',colo,attrs=['bold'])
-		diclen=len(host[i])
 		c0="uname"
 		if enable == "n" :
                 	user=raw_input("Provide your username for server "+i+" ")
@@ -95,22 +124,37 @@ def work(host):
 		sysname=connobj.command(c0).rstrip("\n")
                 if i=="es4jb04bsab":
                         for x in host[i]:
+				if x.find("url")>=0 or x.find("process")>=0:
+					continue
                                 command=command+"|\:"+x+"$"
                         command=command+"'|grep -i '172.18.215.45"
                 elif sysname.find("AIX")>=0:
                         for x in host[i]:
+                                if x.find("url")>=0 or x.find("process")>=0:
+					continue
                                 command=command+"|\."+x+"$"
                 else:
                         for x in host[i]:
+				print("current ",x)
+                                if x.find("url")>=0 or x.find("process")>=0:
+                                        continue
                                 command=command+"|\:"+x+"$"
                 c1="hostname >"+rfilename+";netstat -an |grep -i listen| grep -iv tcp6| awk '{print $4}'|egrep -i '99999"+command+"'>>"+rfilename
                 c2="echo Disk space >>"+rfilename+";df -Pm|sed 's?%??g'| awk '$(NF-1) > "+disksize+" {print $0}'>>"+rfilename+""
 		connobj.command(c1)
 		connobj.command(c2)
+        	urlcommand(host[i])
+		processcommand(host[i])
+		connobj.command(c4)
+		connobj.command(c5)
 		connobj.recieve(rfilename,lfilename)
 		pFound=colored("All OK",'green')
 		print colored(" --- Ports information --(os - %s )-- "%(sysname),'white',colo,  attrs=['bold'])	
 		for x in host[i]:
+			if x.find("url")>=0 or x.find("process")>=0:
+				continue
+
+			diclen=diclen+1	
 			colored("\t ---- PORTS ---- ",'green')
 			with open(lfilename, 'r') as f:
 				for line in f:
@@ -134,29 +178,86 @@ def work(host):
 		print("\t Ports found =%s Ports required =%s"%(count,diclen))
 		port.append([i,pFound])
 
+############## disk info #############
 
 		print colored(" --- Disk Info: More then "+disksize+" ---- ",'white',colo,  attrs=['bold'])
+		dfound=False
 		with open(lfilename, 'r') as f:
 			for line in f:
-				dfound=False
 				if "Filesystem" in line:		
 					for line in f:
-						colored("\t ---Disk more than "+disksize+"---- ",'green')
-						print(line.rstrip("\n"))
+						if "URL" in line:
+							break
+						#colored("\t ---Disk more than "+disksize+"---- ",'green')
+						print("\t"+line.rstrip("\n"))
 						if len(line)>5:
 							dfound=True
+
 			arrlen=len(port)
 			newarr=port[arrlen-1]
 			if dfound:
 				newarr.append(colored("FileSystem more than "+disksize,'red'))
 			else:
 				newarr.append(colored("FileSystem OK",'green'))
+
+
+################# URL CHECKING ######### 
+		ufound=True
+                print colored(" --- URL Info ---- ",'white',colo,  attrs=['bold'])
+                with open(lfilename, 'r') as f:
+                        for line in f:
+                                if "URL" in line:
+                                        for line in f:
+                                                if line.find("Process CHECKING")>=0:
+                                                        break
+						if line.find("checking")>=0 or line.find("response")>=0:
+							continue
+                                                if line.rstrip("\n")[-1]=="1":
+                                                       	ufound=False
+							print colored(line.rstrip("\n")+"\t\t NOT OK",'red')
+						else:
+							print colored(line.rstrip("\n")+"\t\t OK",'green')
+                        arrlen=len(port)
+                        newarr=port[arrlen-1]
+                        if ufound:
+                                newarr.append(colored("URL OK",'green'))
+                        else:
+                                newarr.append(colored("URL not OK",'red'))
+
+################ PROCESS Checking
+
+                pfound=True
+                print colored(" --- Process Info ---- ",'white',colo,  attrs=['bold'])
+                with open(lfilename, 'r') as f:
+                        for line in f:
+                                if "Process" in line:
+					for line in f:
+						n=line.split(" ")[0]
+						n2=line.rstrip("\n").split(" ")[1]
+						if host[i][n]==n2:
+							print colored("\t"+n+"\t requiredValue: "+host[i][n]+" ValueiFound: "+n2,'green')	
+						else:
+							print colored("\t"+n+"\t required value"+host[i][n]+" Value found"+n2,'red')
+							pfound=False
+
+
+                        arrlen=len(port)
+                        newarr=port[arrlen-1]
+                        if pfound:
+                                newarr.append(colored("Processes OK",'green'))
+                        else:
+                                newarr.append(colored("Process not OK",'red'))
+
+#####################
+
+
 			
 
 
 		print("\n")
 		command=" "
-		os.remove(lfilename)
+		command4=""
+#		os.remove(lfilename)
 
 ##### Method to print summary
 def tabprint():
@@ -173,5 +274,6 @@ work(jboss)
 #work(jboss2)
 work(treasury)
 work(ondemand)
+#work(dummy)
 tabprint()
-dirremove()
+#dirremove()
