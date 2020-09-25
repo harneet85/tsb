@@ -1,0 +1,24 @@
+uk1od11tsb
+*.9080
+*.9081
+*.9082
+Disk space
+Filesystem    MB blocks      Used Available Capacity Mounted on
+/dev/lv_ptfs   12288.00  11130.10   1157.90      91 /ptfs
+/dev/lv_software   8192.00   7768.18    423.82      95 /software
+---- URL CHECKING ------
+checking http://localhost:9082/docGeneration/
+HTTP request sent, awaiting response... 200 OK
+	url5		http://localhost:9082/docGeneration/ 0
+checking http://localhost:9081/gdOnDemand/servlet/gdOnDemand
+HTTP request sent, awaiting response... 200 OK
+	url4		http://localhost:9081/gdOnDemand/servlet/gdOnDemand 0
+checking http://localhost:9080/navigator
+HTTP request sent, awaiting response... 200 OK
+	url1		http://localhost:9080/navigator 0
+checking http://localhost:9080/samlsps/
+	url3		http://localhost:9080/samlsps/ 1
+checking http://localhost:9080/tsbSSOPlugin/sso.properties
+	url2		http://localhost:9080/tsbSSOPlugin/sso.properties 1
+---- Process CHECKING ------
+process_server1 3

@@ -21,8 +21,8 @@ port=[]
 command1=""
 hostcount=0
 disksize="90"
-user=""
-passw=""
+user="in0090g5"
+passw="Wizard12345"
 dirname="sodout"
 colorama.init()
 enable="yes"
@@ -284,7 +284,7 @@ def work(host):
 
 ##### Method to print summary
 def tabprint():
-	print("----------Summary-------------- ")
+	print("\t----------Summary-------------- ")
 	print(tabulate(port,head,tablefmt="pretty"))
 
 
@@ -299,3 +299,4 @@ work(treasury)
 work(ondemand)
 tabprint()
 dirremove()
+print("\tJBOSS server scheduled to stop at 06:00 CEST and start at 07:00 CEST, Mon - Fri")

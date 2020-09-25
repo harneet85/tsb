@@ -1,0 +1,19 @@
+uk2py03tsb
+10.185.54.149.80
+10.185.54.149.443
+10.185.54.149.666
+*.19021
+*.19022
+*.19023
+*.19024
+Disk space
+Filesystem    MB blocks      Used Available Capacity Mounted on
+/dev/lv_lgsym   1024.00    922.18    101.82      91 /var/log/sdcsslog
+---- URL CHECKING ------
+checking 10.185.54.149/ok.html
+HTTP request sent, awaiting response... 200 OK
+	url1		10.185.54.149/ok.html 0
+---- Process CHECKING ------
+process_pocx3knl 4
+process_pdex3 24
+process_pocx3htp 4

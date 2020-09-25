@@ -1,0 +1,18 @@
+uk1py07tsb
+*.19029
+*.19030
+*.19031
+10.184.54.155.80
+10.184.54.155.443
+10.184.54.155.666
+Disk space
+Filesystem    MB blocks      Used Available Capacity Mounted on
+/dev/sdcsslog   1024.00    922.14    101.86      91 /var/log/sdcsslog
+---- URL CHECKING ------
+checking 10.184.54.155/ok.html
+HTTP request sent, awaiting response... 200 OK
+	url1		10.184.54.155/ok.html 0
+---- Process CHECKING ------
+process_pocx3htp 3
+process_pocx3knl 3
+process_pdex3 18

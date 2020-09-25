@@ -1,0 +1,18 @@
+uk1py05tsb
+*.19025
+*.19026
+*.19027
+*.19028
+10.184.54.153.80
+10.184.54.153.443
+10.184.54.153.666
+Disk space
+Filesystem    MB blocks      Used Available Capacity Mounted on
+---- URL CHECKING ------
+checking 10.184.54.153/ok.html
+HTTP request sent, awaiting response... 200 OK
+	url1		10.184.54.153/ok.html 0
+---- Process CHECKING ------
+process_pocx3knl 4
+process_pdex3 24
+process_pocx3htp 4
