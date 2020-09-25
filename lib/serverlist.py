@@ -1,4 +1,12 @@
 ######## Host port mapping
+########
+#### URL Monitoring ---> add new entry in existing server 
+######## format ---> "url<anything>":"a url without http( localhost or ip )"
+#
+### Process Monitoring ---> add new entry in existing server
+####### format ---> "process_<exact name of process to grep>":"<count of that process>"
+###
+#### Port Monitoring ---> anything else not in format of URL and Process is considered port entry
 
 papyrus= {
 "uk1py01tsb":{"19050":"IPAM","19051":"DC","19049":"NODE01"},
