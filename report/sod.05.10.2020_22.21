@@ -1,0 +1,48 @@
+[1m[43m[37m
+_______________________1 uk1py03tsb ______________created by harneesi@in.ibm.com
+[0m
+Traceback (most recent call last):
+  File "sod.py", line 297, in <module>
+    work(papyrus)
+  File "sod.py", line 152, in work
+    connobj.recieve(rfilename,lfilename)
+  File "/home/harneet/scripts/tsb/lib/connect.py", line 18, in recieve
+    sftp.get(sfile,dfile)
+  File "/usr/lib/python2.7/site-packages/paramiko/sftp_client.py", line 720, in get
+    with open(localpath, 'wb') as fl:
+IOError: [Errno 2] No such file or directory: './sodout/uk1py03tsb'
+[0m[1m[43m[37m
+_______________________1 uk1py03tsb ______________created by harneesi@in.ibm.com
+[0m
+[1m[43m[37m	--- Ports information --(os - AIX )-- [0m
+[32m	uk1py03tsb	 443	 HTTPS	 FOUND 	10.184.54.151.443[0m
+[32m	uk1py03tsb	 666	 HTTP	 FOUND 	10.184.54.151.666[0m
+[32m	uk1py03tsb	 1933	 pocx3htp	 FOUND 	*.1933[0m
+[32m	uk1py03tsb	 1932	 pocx3htp	 FOUND 	*.1932[0m
+[32m	uk1py03tsb	 1931	 pocx3htp	 FOUND 	*.1931[0m
+[32m	uk1py03tsb	 1930	 pocx3htp	 FOUND 	*.1930[0m
+[32m	uk1py03tsb	 19024	 NODE04_pocx3knl	 FOUND 	*.19024[0m
+[32m	uk1py03tsb	 80	 HTTP	 FOUND 	10.184.54.151.80[0m
+[32m	uk1py03tsb	 19021	 NODE01_pocx3knl	 FOUND 	*.19021[0m
+[32m	uk1py03tsb	 19023	 NODE03_pocx3knl	 FOUND 	*.19023[0m
+[32m	uk1py03tsb	 19022	 NODE02_pocx3knl	 FOUND 	*.19022[0m
+[1m[5m[42m[37m	 ALL Ports verified OK 	[0m
+	 Ports found =11 Ports required =11
+[1m[43m[37m	--- Disk Info: More then 90 ---- [0m
+[1m[43m[37m	--- URL Info ---- [0m
+[32m	url5		10.184.54.151/ok.html 0		 OK[0m
+[31m	url4		uk1py03tsb:1933/GDC0001.html 1		 NOT OK[0m
+[31m	url1		uk1py03tsb:1930/GDC0001.html 1		 NOT OK[0m
+[31m	url3		uk1py03tsb:1932/GDC0001.html 1		 NOT OK[0m
+[31m	url2		uk1py03tsb:1931/GDC0001.html 1		 NOT OK[0m
+[1m[5m[41m[37m	 ----SOMETHING WRONG -----[0m
+[1m[43m[37m	--- Process Info ---- [0m
+[31m	process_pdex3	 required value24 Value found18[0m
+[32m	process_pocx3knl	 requiredValue: 4 ValueFound: 4[0m
+[32m	process_pocx3htp	 requiredValue: 4 ValueFound: 4[0m
+[1m[5m[41m[37m	 ----SOMETHING WRONG -----[0m
+
+
+[1m[43m[37m
+_______________________2 uk2py03tsb ______________created by harneesi@in.ibm.com
+[0m

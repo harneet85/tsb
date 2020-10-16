@@ -90,7 +90,7 @@ def processcommand(hosturl):
                 if i.find("process")>=0:
                         #command5=command5+"echo checking "+hosturl[i]+">>"+rfilename+";echo""| awk '{print \"\t"+i+"\t\t"+str(hosturl[i])+" \" system(\"wget "+str(hosturl[i])+" 2>&1| egrep 'OK'\") }' >> "+rfilename+";"
                         command5=command5+"a=`echo "+i+"| awk -F\"_\" '{system(\"ps -ef | grep -i \"$2)}'|grep -v grep|wc -l`; echo "+i+" $a  >> "+rfilename+";"
-	c5="echo ---- Process CHECKING ------ >> "+rfilename+";"+command5+"echo ---- Process End----- >>"+rfilename
+        c5="echo ---- Process CHECKING ------ >> "+rfilename+";"+command5+"echo ---- Process End----- >>"+rfilename
 
 def portcommand(hostin,sysnamein):
 	global command1
@@ -131,7 +131,7 @@ def work(host):
 		rfilename="/tmp/"+user+"."+i
 		lfilename="./"+dirname+"/"+i
 		setcolor(i)
-		print colored("\n_______________________%s %s ______________created by harneesi@in.ibm.com\n"%(hostcount,i),'white',colo,attrs=['bold'])
+		print "colored(\"\n_______________________%s %s ______________created by harneesi@in.ibm.com\n\"%(hostcount,i),'white',colo,attrs=['bold'])"
 		c0="uname"
 		if enable == "n" :
                 	user=raw_input("Provide your username for server "+i+" ")
@@ -151,7 +151,7 @@ def work(host):
 		connobj.command(c5)
 		connobj.recieve(rfilename,lfilename)
 		pFound=colored("All OK",'green')
-		print colored("\t--- Ports information --(os - %s )-- "%(sysname),'white',colo,  attrs=['bold'])	
+		print colored(" --- Ports information --(os - %s )-- "%(sysname),'white',colo,  attrs=['bold'])	
 		for x in host[i]:
 			if x.find("url")>=0 or x.find("process")>=0:
 				continue
@@ -178,7 +178,7 @@ def work(host):
 
 ############## disk info #############
 
-		print colored("\t--- Disk Info: More then "+disksize+" ---- ",'white',colo,  attrs=['bold'])
+		print colored(" --- Disk Info: More then "+disksize+" ---- ",'white',colo,  attrs=['bold'])
 		dfound=False
 		with open(lfilename, 'r') as f:
 			for line in f:
@@ -202,7 +202,7 @@ def work(host):
 ################# URL CHECKING ######### 
 		ufound=True
 		ufound2=False
-                print colored("\t--- URL Info ---- ",'white',colo,  attrs=['bold'])
+                print colored(" --- URL Info ---- ",'white',colo,  attrs=['bold'])
                 with open(lfilename, 'r') as f:
                         for line in f:
                                 if "URL" in line:
@@ -236,7 +236,7 @@ def work(host):
 
                 pfound=True
 		pfound2=False
-                print colored("\t--- Process Info ---- ",'white',colo,  attrs=['bold'])
+                print colored(" --- Process Info ---- ",'white',colo,  attrs=['bold'])
                 with open(lfilename, 'r') as f:
                         for line in f:
                                 if "Process" in line:

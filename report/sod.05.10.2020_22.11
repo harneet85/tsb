@@ -1,0 +1,14 @@
+[1m[43m[37m
+_______________________1 uk1py03tsb ______________created by harneesi@in.ibm.com
+[0m
+Traceback (most recent call last):
+  File "sod.py", line 297, in <module>
+    work(papyrus)
+  File "sod.py", line 142, in work
+    connobj.conexe(i,user,passw)
+  File "/home/harneet/scripts/tsb/lib/connect.py", line 29, in conexe
+    ssh.connect(hostname=host, username=user, password=passw)
+  File "/usr/lib/python2.7/site-packages/paramiko/client.py", line 324, in connect
+    raise NoValidConnectionsError(errors)
+paramiko.ssh_exception.NoValidConnectionsError: [Errno None] Unable to connect to port 22 on 100.112.8.136
+[0m

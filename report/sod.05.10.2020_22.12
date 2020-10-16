@@ -1,0 +1,14 @@
+[1m[43m[37m
+_______________________1 uk1py03tsb ______________created by harneesi@in.ibm.com
+[0m
+Traceback (most recent call last):
+  File "sod.py", line 297, in <module>
+    work(papyrus)
+  File "sod.py", line 152, in work
+    connobj.recieve(rfilename,lfilename)
+  File "/home/harneet/scripts/tsb/lib/connect.py", line 18, in recieve
+    sftp.get(sfile,dfile)
+  File "/usr/lib/python2.7/site-packages/paramiko/sftp_client.py", line 720, in get
+    with open(localpath, 'wb') as fl:
+IOError: [Errno 2] No such file or directory: './sodout/uk1py03tsb'
+[0m

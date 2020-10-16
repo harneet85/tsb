@@ -1,0 +1,375 @@
+[1m[43m[37m
+_______________________1 uk1py03tsb ______________created by harneesi@in.ibm.com
+[0m
+[1m[43m[37m	--- Ports information --(os - AIX )-- [0m
+[32m	uk1py03tsb	 443	 HTTPS	 FOUND 	10.184.54.151.443[0m
+[32m	uk1py03tsb	 666	 HTTP	 FOUND 	10.184.54.151.666[0m
+[32m	uk1py03tsb	 1933	 pocx3htp	 FOUND 	*.1933[0m
+[32m	uk1py03tsb	 1932	 pocx3htp	 FOUND 	*.1932[0m
+[32m	uk1py03tsb	 1931	 pocx3htp	 FOUND 	*.1931[0m
+[32m	uk1py03tsb	 1930	 pocx3htp	 FOUND 	*.1930[0m
+[32m	uk1py03tsb	 19024	 NODE04_pocx3knl	 FOUND 	*.19024[0m
+[32m	uk1py03tsb	 80	 HTTP	 FOUND 	10.184.54.151.80[0m
+[32m	uk1py03tsb	 19021	 NODE01_pocx3knl	 FOUND 	*.19021[0m
+[32m	uk1py03tsb	 19023	 NODE03_pocx3knl	 FOUND 	*.19023[0m
+[32m	uk1py03tsb	 19022	 NODE02_pocx3knl	 FOUND 	*.19022[0m
+[1m[5m[42m[37m	 ALL Ports verified OK 	[0m
+	 Ports found =11 Ports required =11
+[1m[43m[37m	--- Disk Info: More then 90 ---- [0m
+[1m[43m[37m	--- URL Info ---- [0m
+[32m	url5		10.184.54.151/ok.html 0		 OK[0m
+[32m	url4		127.0.0.1:1933/GDC0001.html 0		 OK[0m
+[32m	url1		127.0.0.1:1930/GDC0001.html 0		 OK[0m
+[32m	url3		127.0.0.1:1932/GDC0001.html 0		 OK[0m
+[32m	url2		127.0.0.1:1931/GDC0001.html 0		 OK[0m
+[1m[5m[42m[37m	 ALL URL verified OK 	[0m
+[1m[43m[37m	--- Process Info ---- [0m
+[32m	process_pdex3	 requiredValue: 24 ValueFound: 24[0m
+[32m	process_pocx3knl	 requiredValue: 4 ValueFound: 4[0m
+[32m	process_pocx3htp	 requiredValue: 4 ValueFound: 4[0m
+[1m[5m[42m[37m	 ALL Process verified OK 	[0m
+
+
+[1m[43m[37m
+_______________________2 uk2py03tsb ______________created by harneesi@in.ibm.com
+[0m
+[1m[43m[37m	--- Ports information --(os - AIX )-- [0m
+[32m	uk2py03tsb	 443	 HTTPS	 FOUND 	10.185.54.149.443[0m
+[32m	uk2py03tsb	 666	 HTTP	 FOUND 	10.185.54.149.666[0m
+[32m	uk2py03tsb	 1933	 pocx3htp	 FOUND 	*.1933[0m
+[32m	uk2py03tsb	 1932	 pocx3htp	 FOUND 	*.1932[0m
+[32m	uk2py03tsb	 1931	 pocx3htp	 FOUND 	*.1931[0m
+[32m	uk2py03tsb	 1930	 pocx3htp	 FOUND 	*.1930[0m
+[32m	uk2py03tsb	 19024	 NODE04	 FOUND 	*.19024[0m
+[32m	uk2py03tsb	 80	 HTTP	 FOUND 	10.185.54.149.80[0m
+[32m	uk2py03tsb	 19021	 NODE01_pocx3knl	 FOUND 	*.19021[0m
+[32m	uk2py03tsb	 19023	 NODE03_pocx3knl	 FOUND 	*.19023[0m
+[32m	uk2py03tsb	 19022	 NODE02_pocx3knl	 FOUND 	*.19022[0m
+[1m[5m[42m[37m	 ALL Ports verified OK 	[0m
+	 Ports found =11 Ports required =11
+[1m[43m[37m	--- Disk Info: More then 90 ---- [0m
+	/dev/lv_lgsym   1024.00    922.18    101.82      91 /var/log/sdcsslog
+[1m[43m[37m	--- URL Info ---- [0m
+[32m	url5		10.185.54.149/ok.html 0		 OK[0m
+[32m	url4		127.0.0.1:1933/GDC0001.html 0		 OK[0m
+[32m	url1		127.0.0.1:1930/GDC0001.html 0		 OK[0m
+[32m	url3		127.0.0.1:1932/GDC0001.html 0		 OK[0m
+[32m	url2		127.0.0.1:1931/GDC0001.html 0		 OK[0m
+[1m[5m[42m[37m	 ALL URL verified OK 	[0m
+[1m[43m[37m	--- Process Info ---- [0m
+[32m	process_pdex3	 requiredValue: 24 ValueFound: 24[0m
+[32m	process_pocx3knl	 requiredValue: 4 ValueFound: 4[0m
+[32m	process_pocx3htp	 requiredValue: 4 ValueFound: 4[0m
+[1m[5m[42m[37m	 ALL Process verified OK 	[0m
+
+
+[1m[43m[37m
+_______________________3 uk1py05tsb ______________created by harneesi@in.ibm.com
+[0m
+[1m[43m[37m	--- Ports information --(os - AIX )-- [0m
+[32m	uk1py05tsb	 443	 HTTPS	 FOUND 	10.184.54.153.443[0m
+[32m	uk1py05tsb	 666	 HTTP	 FOUND 	10.184.54.153.666[0m
+[32m	uk1py05tsb	 1937	 pocxhtp	 FOUND 	*.1937[0m
+[32m	uk1py05tsb	 19028	 NODE08_pocx3knl	 FOUND 	*.19028[0m
+[32m	uk1py05tsb	 1935	 pocxhtp	 FOUND 	*.1935[0m
+[32m	uk1py05tsb	 1934	 pocxhtp	 FOUND 	*.1934[0m
+[32m	uk1py05tsb	 19025	 NODE05_pocx3knl	 FOUND 	*.19025[0m
+[32m	uk1py05tsb	 19027	 NODE07_pocx3knl	 FOUND 	*.19027[0m
+[32m	uk1py05tsb	 19026	 NODE06_pocx3knl	 FOUND 	*.19026[0m
+[32m	uk1py05tsb	 80	 HTTP	 FOUND 	10.184.54.153.80[0m
+[32m	uk1py05tsb	 1936	 pocxhtp	 FOUND 	*.1936[0m
+[1m[5m[42m[37m	 ALL Ports verified OK 	[0m
+	 Ports found =11 Ports required =11
+[1m[43m[37m	--- Disk Info: More then 90 ---- [0m
+[1m[43m[37m	--- URL Info ---- [0m
+[32m	url3		127.0.0.1:1936/GDC0001.html 0		 OK[0m
+[32m	url2		127.0.0.1:1935/GDC0001.html 0		 OK[0m
+[32m	url5		10.184.54.153/ok.html 0		 OK[0m
+[32m	url4		127.0.0.1:1937/GDC0001.html 0		 OK[0m
+[32m	url1		127.0.0.1:1934/GDC0001.html 0		 OK[0m
+[1m[5m[42m[37m	 ALL URL verified OK 	[0m
+[1m[43m[37m	--- Process Info ---- [0m
+[32m	process_pocx3htp	 requiredValue: 4 ValueFound: 4[0m
+[32m	process_pocx3knl	 requiredValue: 4 ValueFound: 4[0m
+[32m	process_pdex3	 requiredValue: 24 ValueFound: 24[0m
+[1m[5m[42m[37m	 ALL Process verified OK 	[0m
+
+
+[1m[43m[37m
+_______________________4 uk2py01tsb ______________created by harneesi@in.ibm.com
+[0m
+[1m[43m[37m	--- Ports information --(os - AIX )-- [0m
+[32m	uk2py01tsb	 19050	 IPAM	 FOUND 	*.19050[0m
+[32m	uk2py01tsb	 19051	 DC	 FOUND 	*.19051[0m
+[32m	uk2py01tsb	 19049	 NODE01	 FOUND 	*.19049[0m
+[1m[5m[42m[37m	 ALL Ports verified OK 	[0m
+	 Ports found =3 Ports required =3
+[1m[43m[37m	--- Disk Info: More then 90 ---- [0m
+[1m[43m[37m	--- URL Info ---- [0m
+	No URL to check
+[1m[43m[37m	--- Process Info ---- [0m
+	No processes set[0m
+
+
+[1m[43m[37m
+_______________________5 uk1py01tsb ______________created by harneesi@in.ibm.com
+[0m
+[1m[43m[37m	--- Ports information --(os - AIX )-- [0m
+[32m	uk1py01tsb	 19050	 IPAM	 FOUND 	*.19050[0m
+[32m	uk1py01tsb	 19051	 DC	 FOUND 	*.19051[0m
+[32m	uk1py01tsb	 19049	 NODE01	 FOUND 	*.19049[0m
+[1m[5m[42m[37m	 ALL Ports verified OK 	[0m
+	 Ports found =3 Ports required =3
+[1m[43m[37m	--- Disk Info: More then 90 ---- [0m
+[1m[43m[37m	--- URL Info ---- [0m
+	No URL to check
+[1m[43m[37m	--- Process Info ---- [0m
+	No processes set[0m
+
+
+[1m[43m[37m
+_______________________6 uk1py07tsb ______________created by harneesi@in.ibm.com
+[0m
+[1m[43m[37m	--- Ports information --(os - AIX )-- [0m
+[32m	uk1py07tsb	 443	 HTTPS	 FOUND 	10.184.54.155.443[0m
+[32m	uk1py07tsb	 666	 HTTP	 FOUND 	10.184.54.155.666[0m
+[32m	uk1py07tsb	 1940	 pocxhtp	 FOUND 	*.1940[0m
+[32m	uk1py07tsb	 19029	 NODE09_pocx3knl	 FOUND 	*.19029[0m
+[32m	uk1py07tsb	 80	 HTTP	 FOUND 	10.184.54.155.80[0m
+[32m	uk1py07tsb	 1938	 pocxhtp	 FOUND 	*.1938[0m
+[32m	uk1py07tsb	 1939	 pocxhtp	 FOUND 	*.1939[0m
+[32m	uk1py07tsb	 19030	 NODE10_pocx3knl	 FOUND 	*.19030[0m
+[32m	uk1py07tsb	 19031	 NODE11_pocx3knl	 FOUND 	*.19031[0m
+[1m[5m[42m[37m	 ALL Ports verified OK 	[0m
+	 Ports found =9 Ports required =9
+[1m[43m[37m	--- Disk Info: More then 90 ---- [0m
+	/dev/sdcsslog   1024.00    922.14    101.86      91 /var/log/sdcsslog
+[1m[43m[37m	--- URL Info ---- [0m
+[32m	url4		10.184.54.155/ok.html 0		 OK[0m
+[32m	url3		127.0.0.1:1940/GDC0001.html 0		 OK[0m
+[32m	url2		127.0.0.1:1939/GDC0001.html 0		 OK[0m
+[32m	url1		127.0.0.1:1938/GDC0001.html 0		 OK[0m
+[1m[5m[42m[37m	 ALL URL verified OK 	[0m
+[1m[43m[37m	--- Process Info ---- [0m
+[32m	process_pocx3htp	 requiredValue: 3 ValueFound: 3[0m
+[32m	process_pdex3	 requiredValue: 18 ValueFound: 18[0m
+[32m	process_pocx3knl	 requiredValue: 3 ValueFound: 3[0m
+[1m[5m[42m[37m	 ALL Process verified OK 	[0m
+
+
+[1m[43m[37m
+_______________________7 uk2py07tsb ______________created by harneesi@in.ibm.com
+[0m
+[1m[43m[37m	--- Ports information --(os - AIX )-- [0m
+[32m	uk2py07tsb	 443	 HTTPS	 FOUND 	10.185.54.153.443[0m
+[32m	uk2py07tsb	 666	 HTTP	 FOUND 	10.185.54.153.666[0m
+[32m	uk2py07tsb	 1940	 pocxhtp	 FOUND 	*.1940[0m
+[32m	uk2py07tsb	 19029	 NODE09_pocx3knl	 FOUND 	*.19029[0m
+[32m	uk2py07tsb	 80	 HTTP	 FOUND 	10.185.54.153.80[0m
+[32m	uk2py07tsb	 1938	 pocxhtp	 FOUND 	*.1938[0m
+[32m	uk2py07tsb	 1939	 pocxhtp	 FOUND 	*.1939[0m
+[32m	uk2py07tsb	 19030	 NODE10_pocx3knl	 FOUND 	*.19030[0m
+[32m	uk2py07tsb	 19031	 NODE11_pocx3knl	 FOUND 	*.19031[0m
+[1m[5m[42m[37m	 ALL Ports verified OK 	[0m
+	 Ports found =9 Ports required =9
+[1m[43m[37m	--- Disk Info: More then 90 ---- [0m
+[1m[43m[37m	--- URL Info ---- [0m
+[32m	url4		10.185.54.153/ok.html 0		 OK[0m
+[32m	url3		127.0.0.1:1940/GDC0001.html 0		 OK[0m
+[32m	url2		127.0.0.1:1939/GDC0001.html 0		 OK[0m
+[32m	url1		127.0.0.1:1938/GDC0001.html 0		 OK[0m
+[1m[5m[42m[37m	 ALL URL verified OK 	[0m
+[1m[43m[37m	--- Process Info ---- [0m
+[32m	process_pocx3htp	 requiredValue: 3 ValueFound: 3[0m
+[32m	process_pdex3	 requiredValue: 18 ValueFound: 18[0m
+[32m	process_pocx3knl	 requiredValue: 3 ValueFound: 3[0m
+[1m[5m[42m[37m	 ALL Process verified OK 	[0m
+
+
+[1m[43m[37m
+_______________________8 uk2py05tsb ______________created by harneesi@in.ibm.com
+[0m
+[1m[43m[37m	--- Ports information --(os - AIX )-- [0m
+[32m	uk2py05tsb	 443	 HTTPS	 FOUND 	10.185.54.151.443[0m
+[32m	uk2py05tsb	 666	 HTTP	 FOUND 	10.185.54.151.666[0m
+[32m	uk2py05tsb	 1937	 pocxhtp	 FOUND 	*.1937[0m
+[32m	uk2py05tsb	 19028	 NODE08_pocx3knl	 FOUND 	*.19028[0m
+[32m	uk2py05tsb	 1935	 pocxhtp	 FOUND 	*.1935[0m
+[32m	uk2py05tsb	 1934	 pocxhtp	 FOUND 	*.1934[0m
+[32m	uk2py05tsb	 19025	 NODE05_pocx3knl	 FOUND 	*.19025[0m
+[32m	uk2py05tsb	 19027	 NODE07_pocx3knl	 FOUND 	*.19027[0m
+[32m	uk2py05tsb	 19026	 NODE06_pocx3knl	 FOUND 	*.19026[0m
+[32m	uk2py05tsb	 80	 HTTP	 FOUND 	10.185.54.151.80[0m
+[32m	uk2py05tsb	 1936	 pocxhtp	 FOUND 	*.1936[0m
+[1m[5m[42m[37m	 ALL Ports verified OK 	[0m
+	 Ports found =11 Ports required =11
+[1m[43m[37m	--- Disk Info: More then 90 ---- [0m
+	/dev/lv_lgsym   1024.00    922.16    101.84      91 /var/log/sdcsslog
+[1m[43m[37m	--- URL Info ---- [0m
+[32m	url3		127.0.0.1:1936/GDC0001.html 0		 OK[0m
+[32m	url2		127.0.0.1:1935/GDC0001.html 0		 OK[0m
+[32m	url5		10.185.54.151/ok.html 0		 OK[0m
+[32m	url4		127.0.0.1:1937/GDC0001.html 0		 OK[0m
+[32m	url1		127.0.0.1:1934/GDC0001.html 0		 OK[0m
+[1m[5m[42m[37m	 ALL URL verified OK 	[0m
+[1m[43m[37m	--- Process Info ---- [0m
+[32m	process_pocx3htp	 requiredValue: 4 ValueFound: 4[0m
+[32m	process_pocx3knl	 requiredValue: 4 ValueFound: 4[0m
+[32m	process_pdex3	 requiredValue: 24 ValueFound: 24[0m
+[1m[5m[42m[37m	 ALL Process verified OK 	[0m
+
+
+[1m[45m[37m
+_______________________9 es4jb04bsab ______________created by harneesi@in.ibm.com
+[0m
+[1m[45m[37m	--- Ports information --(os - Linux )-- [0m
+[32m	es4jb04bsab	 4447	 JBoss	 FOUND 	172.18.215.44:4447[0m
+[32m	es4jb04bsab	 4446	 JBoss	 FOUND 	172.18.215.23:4446[0m
+[32m	es4jb04bsab	 8083	 JBoss	 FOUND 	172.18.215.23:8083[0m
+[32m	es4jb04bsab	 3873	 JBoss	 FOUND 	172.18.215.23:3873[0m
+[32m	es4jb04bsab	 1098	 JBoss	 FOUND 	172.18.215.23:1098[0m
+[32m	es4jb04bsab	 1099	 JBoss	 FOUND 	172.18.215.23:1099[0m
+[32m	es4jb04bsab	 7900	 JBoss	 FOUND 	172.18.215.23:7900[0m
+[32m	es4jb04bsab	 8565	 JBoss	 FOUND 	172.18.215.43:8565[0m
+[32m	es4jb04bsab	 4457	 JBoss	 FOUND 	172.18.215.23:4457[0m
+[32m	es4jb04bsab	 8009	 JBoss	 FOUND 	172.18.215.23:8009[0m
+[32m	es4jb04bsab	 1100	 JBoss	 FOUND 	172.18.215.23:1100[0m
+[32m	es4jb04bsab	 1101	 JBoss	 FOUND 	172.18.215.23:1101[0m
+[32m	es4jb04bsab	 4448	 JBoss	 FOUND 	172.18.215.23:4448[0m
+[32m	es4jb04bsab	 4444	 JBoss	 FOUND 	172.18.215.23:4444[0m
+[32m	es4jb04bsab	 3528	 JBoss	 FOUND 	172.18.215.23:3528[0m
+[32m	es4jb04bsab	 4445	 JBoss	 FOUND 	172.18.215.23:4445[0m
+[1m[5m[42m[37m	 ALL Ports verified OK 	[0m
+	 Ports found =16 Ports required =16
+[1m[45m[37m	--- Disk Info: More then 90 ---- [0m
+	/dev/mapper/appvg-appvol     15587     14269       534      97 /app
+[1m[45m[37m	--- URL Info ---- [0m
+	No URL to check
+[1m[45m[37m	--- Process Info ---- [0m
+[32m	process_deritsb	 requiredValue: 2 ValueFound: 2[0m
+[32m	process_deriuattsb	 requiredValue: 2 ValueFound: 2[0m
+[1m[5m[42m[37m	 ALL Process verified OK 	[0m
+
+
+[1m[40m[37m
+_______________________10 uk1ti01tsb ______________created by harneesi@in.ibm.com
+[0m
+[1m[40m[37m	--- Ports information --(os - AIX )-- [0m
+[32m	uk1ti01tsb	 1416	 MQMGR QMPRO	 FOUND 	*.1416[0m
+[1m[5m[42m[37m	 ALL Ports verified OK 	[0m
+	 Ports found =1 Ports required =1
+[1m[40m[37m	--- Disk Info: More then 90 ---- [0m
+	/dev/lv_ptfs   14336.00  14208.18    127.82     100 /ptfs
+[1m[40m[37m	--- URL Info ---- [0m
+	No URL to check
+[1m[40m[37m	--- Process Info ---- [0m
+	No processes set[0m
+
+
+[1m[40m[37m
+_______________________11 uk1ti11tsb ______________created by harneesi@in.ibm.com
+[0m
+[1m[40m[37m	--- Ports information --(os - AIX )-- [0m
+[32m	uk1ti11tsb	 1416	 MQMGR QMTSBGOS	 FOUND 	*.1416[0m
+[1m[5m[42m[37m	 ALL Ports verified OK 	[0m
+	 Ports found =1 Ports required =1
+[1m[40m[37m	--- Disk Info: More then 90 ---- [0m
+[1m[40m[37m	--- URL Info ---- [0m
+	No URL to check
+[1m[40m[37m	--- Process Info ---- [0m
+	No processes set[0m
+
+
+[1m[44m[37m
+_______________________12 uk1od11tsb ______________created by harneesi@in.ibm.com
+[0m
+[1m[44m[37m	--- Ports information --(os - AIX )-- [0m
+[32m	uk1od11tsb	 9082	 server3	 FOUND 	*.9082[0m
+[32m	uk1od11tsb	 9081	 server2	 FOUND 	*.9081[0m
+[32m	uk1od11tsb	 9080	 server1	 FOUND 	*.9080[0m
+[1m[5m[42m[37m	 ALL Ports verified OK 	[0m
+	 Ports found =3 Ports required =3
+[1m[44m[37m	--- Disk Info: More then 90 ---- [0m
+	/dev/lv_ptfs   12288.00  11130.10   1157.90      91 /ptfs
+	/dev/lv_software   8192.00   7768.18    423.82      95 /software
+[1m[44m[37m	--- URL Info ---- [0m
+[32m	url5		http://localhost:9082/docGeneration/ 0		 OK[0m
+[32m	url4		http://localhost:9081/gdOnDemand/servlet/gdOnDemand 0		 OK[0m
+[32m	url1		http://localhost:9080/navigator 0		 OK[0m
+[1m[5m[42m[37m	 ALL URL verified OK 	[0m
+[1m[44m[37m	--- Process Info ---- [0m
+[32m	process_server1	 requiredValue: 3 ValueFound: 3[0m
+[1m[5m[42m[37m	 ALL Process verified OK 	[0m
+
+
+[1m[44m[37m
+_______________________13 uk1od01tsb ______________created by harneesi@in.ibm.com
+[0m
+[1m[44m[37m	--- Ports information --(os - AIX )-- [0m
+[32m	uk1od01tsb	 80	 HTTP	 FOUND 	*.9080[0m
+[32m	uk1od01tsb	 9082	 server3	 FOUND 	*.9082[0m
+[32m	uk1od01tsb	 9081	 server2	 FOUND 	*.9081[0m
+[32m	uk1od01tsb	 9080	 server1	 FOUND 	*.9080[0m
+[1m[5m[42m[37m	 ALL Ports verified OK 	[0m
+	 Ports found =4 Ports required =4
+[1m[44m[37m	--- Disk Info: More then 90 ---- [0m
+	/dev/lv_ptfs   11264.00  10703.65    560.35      96 /ptfs
+	/dev/lv_software   8192.00   7805.87    386.13      96 /software
+[1m[44m[37m	--- URL Info ---- [0m
+[32m	url5		http://localhost:9082/docGeneration/ 0		 OK[0m
+[32m	url4		http://localhost:9081/gdOnDemand/servlet/gdOnDemand 0		 OK[0m
+[32m	url1		http://localhost:9080/navigator 0		 OK[0m
+[32m	url3		http://localhost:9080/samlsps/ 0		 OK[0m
+[32m	url2		http://localhost:9080/tsbSSOPlugin/sso.properties 0		 OK[0m
+[1m[5m[42m[37m	 ALL URL verified OK 	[0m
+[1m[44m[37m	--- Process Info ---- [0m
+[32m	process_server1	 requiredValue: 3 ValueFound: 3[0m
+[1m[5m[42m[37m	 ALL Process verified OK 	[0m
+
+
+[1m[44m[37m
+_______________________14 uk2od01tsb ______________created by harneesi@in.ibm.com
+[0m
+[1m[44m[37m	--- Ports information --(os - AIX )-- [0m
+[32m	uk2od01tsb	 80	 HTTP	 FOUND 	*.9080[0m
+[32m	uk2od01tsb	 9082	 server3	 FOUND 	*.9082[0m
+[32m	uk2od01tsb	 9081	 server2	 FOUND 	*.9081[0m
+[32m	uk2od01tsb	 9080	 server1	 FOUND 	*.9080[0m
+[1m[5m[42m[37m	 ALL Ports verified OK 	[0m
+	 Ports found =4 Ports required =4
+[1m[44m[37m	--- Disk Info: More then 90 ---- [0m
+	/dev/lv_software   8192.00   7773.13    418.87      95 /software
+[1m[44m[37m	--- URL Info ---- [0m
+[32m	url5		http://localhost:9082/docGeneration/ 0		 OK[0m
+[32m	url4		http://localhost:9081/gdOnDemand/servlet/gdOnDemand 0		 OK[0m
+[32m	url1		http://localhost:9080/navigator 0		 OK[0m
+[32m	url3		http://localhost:9080/samlsps/ 0		 OK[0m
+[32m	url2		http://localhost:9080/tsbSSOPlugin/sso.properties 0		 OK[0m
+[1m[5m[42m[37m	 ALL URL verified OK 	[0m
+[1m[44m[37m	--- Process Info ---- [0m
+[32m	process_server1	 requiredValue: 3 ValueFound: 3[0m
+[1m[5m[42m[37m	 ALL Process verified OK 	[0m
+
+
+	----------Summary-------------- 
++-------------+-------------+-------------------------+------------+----------------+
+|   Server    | Port ok/nok |     DiskSize ok/nok     | URL ok/nok | Process ok/nok |
++-------------+-------------+-------------------------+------------+----------------+
+| uk1py03tsb  |   [32mAll OK[0m    |      [32mFileSystem OK[0m      |   [32mURL OK[0m   |  [32mProcesses OK[0m  |
+| uk2py03tsb  |   [32mAll OK[0m    | [31mFileSystem more than 90[0m |   [32mURL OK[0m   |  [32mProcesses OK[0m  |
+| uk1py05tsb  |   [32mAll OK[0m    |      [32mFileSystem OK[0m      |   [32mURL OK[0m   |  [32mProcesses OK[0m  |
+| uk2py01tsb  |   [32mAll OK[0m    |      [32mFileSystem OK[0m      | No URL set[0m | No process set[0m |
+| uk1py01tsb  |   [32mAll OK[0m    |      [32mFileSystem OK[0m      | No URL set[0m | No process set[0m |
+| uk1py07tsb  |   [32mAll OK[0m    | [31mFileSystem more than 90[0m |   [32mURL OK[0m   |  [32mProcesses OK[0m  |
+| uk2py07tsb  |   [32mAll OK[0m    |      [32mFileSystem OK[0m      |   [32mURL OK[0m   |  [32mProcesses OK[0m  |
+| uk2py05tsb  |   [32mAll OK[0m    | [31mFileSystem more than 90[0m |   [32mURL OK[0m   |  [32mProcesses OK[0m  |
+| es4jb04bsab |   [32mAll OK[0m    | [31mFileSystem more than 90[0m | No URL set[0m |  [32mProcesses OK[0m  |
+| uk1ti01tsb  |   [32mAll OK[0m    | [31mFileSystem more than 90[0m | No URL set[0m | No process set[0m |
+| uk1ti11tsb  |   [32mAll OK[0m    |      [32mFileSystem OK[0m      | No URL set[0m | No process set[0m |
+| uk1od11tsb  |   [32mAll OK[0m    | [31mFileSystem more than 90[0m |   [32mURL OK[0m   |  [32mProcesses OK[0m  |
+| uk1od01tsb  |   [32mAll OK[0m    | [31mFileSystem more than 90[0m |   [32mURL OK[0m   |  [32mProcesses OK[0m  |
+| uk2od01tsb  |   [32mAll OK[0m    | [31mFileSystem more than 90[0m |   [32mURL OK[0m   |  [32mProcesses OK[0m  |
++-------------+-------------+-------------------------+------------+----------------+
+	JBOSS server scheduled to stop at 06:00 CEST and start at 07:00 CEST, Mon - Fri
+	Papyrus is scheduled to restart every Sunday at 05:00 CEST 
+[0m
